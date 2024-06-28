@@ -35,17 +35,23 @@ body::-webkit-scrollbar-thumb {
   /* background: linear-gradient(180deg, #101418 0%, rgba(0, 58, 117, 0.16) 100%); */
 }
 
-.header1{
+/* .header1{
+  display: flex;
+  gap:50px;
+  height: 40px;
+  padding: 10px 10px;
+} */
+.navigator{
   display: flex;
   gap:50px;
   height: 40px;
   padding: 10px 10px;
 }
 
-.backButton{
+/* .backButton{
   width: 50px;
   height:100%;
-}
+} */
 
 .pathArea{
   width: 85%;

@@ -6,7 +6,7 @@ import Snackbar from './Snackbar.jsx';
 import SnackbarForFile from './SnackbarForFile.jsx';
 import SnackbarForRename from './SnackbarForRename.jsx';
 import OpenFileDialog from './OpenFile.jsx';
-import FolderNavigator from './FolderNavigator.jsx';
+import FolderNavigator from './AddressBar.jsx';
 
 const App = () => {
   const [filesAndDirectories, setFilesAndDirectories] = useState([]);
@@ -34,6 +34,9 @@ const App = () => {
       setFilesAndDirectories(data);
       if (data.length === 0) {
         setIsFolderEmpty(true);
+      }
+      else {
+        setIsFolderEmpty(false);
       }
     });
   }, []);
@@ -172,6 +175,9 @@ const App = () => {
         checkFile={checkFile}
         openFile={openFile}
         rename={rename}
+        ancestors={ancestors}
+        baseAddress={baseAddress}
+        setPath={setPath}
       />
 
       <div className="hero">
@@ -195,8 +201,6 @@ const App = () => {
           itemClick={itemClick}
           selectedItem={selectedItem}
         />
-
-        {ancestors? <FolderNavigator baseAddress={baseAddress} ancestors={ancestors} setPath={setPath}/>: null}
       </div>
 
       {/* {selectedItem.name ? (<div className="details">

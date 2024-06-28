@@ -6,6 +6,7 @@ import PopupFileName from './PopupFileName.jsx';
 import PopupRename from './PopupRename.jsx';
 import FollowCursorTooltips from './CursorFollow.jsx';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddressBar from './AddressBar.jsx';
 
 function Header({
   navigateBack,
@@ -20,11 +21,14 @@ function Header({
   checkFile,
   openFile,
   rename,
+  ancestors,
+  baseAddress,
+  setPath
 }) {
   return (
     <div>
       <div className="top">
-        <div className="header1">
+        {/* <div className="header1">
           <div className="backButton">
             <IconButton
               sx={{ color: 'white' }}
@@ -38,7 +42,10 @@ function Header({
             </IconButton>
           </div>
           <FollowCursorTooltips showPath={showPath} />
-        </div>
+        </div> */}
+
+
+        {ancestors? <AddressBar ancestors={ancestors} baseAddress={baseAddress} setPath={setPath}/>: null}
 
         <div className="opendFolder">
           <div className="showFolderIcon"></div>

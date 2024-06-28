@@ -16,7 +16,7 @@ const FolderCard = ({baseAddress, name, address, setPath}) => {
   )
 }
 
-const FolderNavigator = ({baseAddress, ancestors, setPath}) => {
+const AddressBar = ({baseAddress, ancestors, setPath}) => {
   console.log(ancestors);
 
   return (
@@ -28,4 +28,4 @@ const FolderNavigator = ({baseAddress, ancestors, setPath}) => {
   )
 }
 
-export default FolderNavigator
+export default AddressBar
