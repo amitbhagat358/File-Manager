@@ -25,13 +25,13 @@ export default function FormDialog({ checkFile, itemClick, openFile }) {
         <IconButton
           sx={{ color: '#70bef2' }}
           aria-label="Create Folder"
-          size="medium"
+          size="small"
         >
           <NoteAddIcon />
         </IconButton>
-        {/* <div className="showText">
-          <span>Create New File</span>
-        </div> */}
+        <div className="renameText">
+          <span>New File</span>
+        </div>
       </div>
       <Dialog
         open={open}

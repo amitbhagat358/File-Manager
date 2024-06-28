@@ -34,6 +34,7 @@ const App = () => {
       setFilesAndDirectories(data);
       if (data.length === 0) {
         setIsFolderEmpty(true);
+        setSelectedItem({name:'', type:''});
       }
       else {
         setIsFolderEmpty(false);

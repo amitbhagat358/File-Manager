@@ -22,15 +22,15 @@ export default function FormDialog({ rename, itemClick, selectedItem }) {
           <IconButton
             sx={{ color: '#70bef2' }}
             aria-label="rename"
-            size="medium"
+            size="small"
             disabled ={selectedItem.name===""}
           >
             <EditIcon />
           </IconButton>
         </div>
-        {/* <div className="showText">
+        <div className="renameText" style={selectedItem.name === ''? {color:"#b6b6b7", cursor:"default"}:null}>
           <span>Rename</span>
-        </div> */}
+        </div>
       </div>
       <Dialog
         open={open}

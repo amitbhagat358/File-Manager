@@ -4,9 +4,8 @@ body {
   box-sizing: border-box;
   margin:0;
   padding:0;
-  color:white;  
   user-select: none;
-  background-color: rgba(31 34 36);
+  font-weight: 500;
 }
 
 body::-webkit-scrollbar {
@@ -23,16 +22,25 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.top{
+#root{
+  padding-top: 193px;
+}
+
+.header1{
+  width:100%;
   position: fixed;
-  width: 100%;
+  top: 0px;
+  background-color: #F5F5F7;
+}
+
+.top{
+  height: 107px;
   display: flex;
   flex-direction: column;
-  background-color: #393E41;
-  border-bottom: 1px solid #000000;
-  padding-bottom:40px;
-  background: linear-gradient(180deg, #101418 0%, rgba(0, 58, 117, 0.16) 100%)
-  /* background: linear-gradient(180deg, #101418 0%, rgba(0, 58, 117, 0.16) 100%); */
+  justify-content: space-around;
+  gap:10px;
+  padding: 20px; 
+  border-bottom: 1px solid #e0e0e0;
 }
 
 /* .header1{
@@ -41,11 +49,18 @@ body::-webkit-scrollbar-thumb {
   height: 40px;
   padding: 10px 10px;
 } */
+
 .navigator{
+  height:30px;
   display: flex;
-  gap:50px;
-  height: 40px;
-  padding: 10px 10px;
+  align-items: center;
+  gap:10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.address-bar-item{
+  font-size: 14px;
 }
 
 /* .backButton{
@@ -53,7 +68,7 @@ body::-webkit-scrollbar-thumb {
   height:100%;
 } */
 
-.pathArea{
+/* .pathArea{
   width: 85%;
   margin-top:-3px;
   height: 100%;
@@ -70,19 +85,12 @@ body::-webkit-scrollbar-thumb {
 
 .pathArea:hover{
   outline:1px solid white;
-}
+} */
 
 .opendFolder{
-  display: flex;
-  justify-content: flex-start;
-  gap:20px;
-  width:230px;
-  height:30px;
-  padding:10px;
-  border: 1px solid #5d5858;
-  border-radius: 10px;
-  margin:7px;
-  box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.11);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 
 .showText{
@@ -92,22 +100,20 @@ body::-webkit-scrollbar-thumb {
   text-align: center;
 }
 
-.header2{
+.actions-bar{
+  width:100%;
+  height: 44px;
   display: flex;
-  justify-content: space-between;
-  width:250px;
-  height: 33px;
-  padding: 5px 0px;
-  border: 1px solid #5d5858;
-  border-radius: 10px;
-  margin:0px 7px;
-  box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.11);;
+  gap:40px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .createFolder, .createFile{
-  width:47px;
+  width:140px;
   height: 100%;
-  /* padding-left:10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .showFolderIcon{
@@ -138,18 +144,29 @@ body::-webkit-scrollbar-thumb {
 }
 
 .delete, .rename{
-  width:40px;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-left:10px;
 }
 
-.rename{
-  padding-left: 0px;
+.deleteText{
+  color:red;
+  font-size: small;
+  cursor: pointer;
 }
 
-.deleteIcon, .renameIcon {
-  height: 40px;
-  width: 40px;
+.renameText{
+  color:blue;
+  font-size: small;
+  cursor: pointer;
+}
+
+
+
+.rename{
+  padding-left: 0px;
 }
 
 
@@ -162,9 +179,6 @@ body::-webkit-scrollbar-thumb {
 .hero{
   display: flex;
   flex-direction: column;
-  position:absolute;
-  z-index:-1;
-  top:210px;
 }
 
 

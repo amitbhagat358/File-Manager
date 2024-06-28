@@ -23,10 +23,10 @@ function Header({
   rename,
   ancestors,
   baseAddress,
-  setPath
+  setPath,
 }) {
   return (
-    <div>
+    <div className="header1">
       <div className="top">
         {/* <div className="header1">
           <div className="backButton">
@@ -44,61 +44,59 @@ function Header({
           <FollowCursorTooltips showPath={showPath} />
         </div> */}
 
+        {ancestors ? (
+          <AddressBar
+            ancestors={ancestors}
+            baseAddress={baseAddress}
+            setPath={setPath}
+          />
+        ) : null}
 
-        {ancestors? <AddressBar ancestors={ancestors} baseAddress={baseAddress} setPath={setPath}/>: null}
+        <div className="opendFolder"> {currentFolder}</div>
+      </div>
 
-        <div className="opendFolder">
-          <div className="showFolderIcon"></div>
-          <div className="showText">{currentFolder}</div>
-        </div>
-
-        <div className="header2">
-          <div
-            className="delete"
-            onClick={() => {
-              if(selectedItem.name !== ""){
-                selectedItem.type === 'directory'
-                  ? deleteFolder(selectedItem.name)
-                  : deleteFile(selectedItem.name);
-              }
-            }}
-          >
-            <div className="deleteIcon">
-              <IconButton
-                sx={{ color: '#70bef2' }}
-                aria-label="delete"
-                size="medium"
-                disabled ={selectedItem.name===""}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-            {/* <div className="showText">
-              <span>Delete</span>
-            </div> */}
+      <div className="actions-bar">
+        <div
+          className="delete"
+          onClick={() => {
+            if (selectedItem.name !== '') {
+              selectedItem.type === 'directory'
+                ? deleteFolder(selectedItem.name)
+                : deleteFile(selectedItem.name);
+            }
+          }}
+        >
+          <div className="deleteIcon">
+            <IconButton
+              color="error"
+              aria-label="delete"
+              size="small"
+              disabled={selectedItem.name === ''}
+            >
+              <DeleteIcon />
+            </IconButton>
           </div>
-
-          <PopupRename
-            rename={rename}
-            itemClick={itemClick}
-            selectedItem={selectedItem}
-          />
-
-          {/* <div className='createFolder'>
-            <div className='createFolderIcon'></div>
-            <div className='showText'><span>Create New Folder</span></div>
-          </div> */}
-          <PopupFolderName
-            createFolder={createFolder}
-            itemClick={itemClick}
-            setErrorInFolder={setErrorInFolder}
-          />
-          <PopupFileName
-            checkFile={checkFile}
-            itemClick={itemClick}
-            openFile={openFile}
-          />
+          <div className="deleteText" style={selectedItem.name === ''? {color:"#b6b6b7", cursor:"default"}:null}>
+            <span>Delete</span>
+          </div>
         </div>
+
+        <PopupRename
+          rename={rename}
+          itemClick={itemClick}
+          selectedItem={selectedItem}
+        />
+
+        <PopupFolderName
+          createFolder={createFolder}
+          itemClick={itemClick}
+          setErrorInFolder={setErrorInFolder}
+        />
+        <PopupFileName
+          checkFile={checkFile}
+          itemClick={itemClick}
+          openFile={openFile}
+        />
       </div>
     </div>
   );

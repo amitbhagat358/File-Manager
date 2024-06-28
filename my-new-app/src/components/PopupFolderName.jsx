@@ -26,12 +26,12 @@ export default function FormDialog({
   return (
     <React.Fragment>
       <div className="createFolder" onClick={handleClickOpen}>
-        <IconButton sx={{ color: '#70bef2' }} aria-label="Create Folder" size="medium">
+        <IconButton sx={{ color: '#70bef2' }} aria-label="Create Folder" size="small">
           <CreateNewFolderIcon />
         </IconButton>
-        {/* <div className="showText">
-          <span>Create New Folder</span>
-        </div> */}
+        <div className="renameText">
+          <span> New Folder</span>
+        </div>
       </div>
       <Dialog
         open={open}
