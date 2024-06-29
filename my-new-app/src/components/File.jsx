@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import ContextMenu from './ContextMenu.jsx';
 
-function Hey({
+function File({
   name,
   type,
+  ext,
   URL,
   path,
   setPath,
@@ -12,6 +13,7 @@ function Hey({
   itemClick,
   selectedItem,
 }) {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -26,7 +28,9 @@ function Hey({
       }}
     >
       <div className={`file ${selectedItem.name ===name? 'selected': null}`}>
-        <div className="fileIcon"></div>
+        <div className={`Icon ${ext.substring(1)}Icon`}>
+        
+        </div>
         <div className="ellipsis">{name}</div>
       </div>
       {isMenuOpen ? <ContextMenu /> : null}
@@ -34,4 +38,4 @@ function Hey({
   );
 }
 
-export default Hey;
+export default File;

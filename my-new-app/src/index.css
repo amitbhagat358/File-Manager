@@ -158,12 +158,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .renameText{
-  color:blue;
+  color:black;
   font-size: small;
   cursor: pointer;
 }
-
-
 
 .rename{
   padding-left: 0px;
@@ -196,20 +194,23 @@ body::-webkit-scrollbar-thumb {
 .folder, .file {
   width: 120px;
   height: 145px;
-  /* background-color: #f0f0f0;
-  border: 1px solid #ddd; */
   margin: 5px;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
 }
 
 
 .selected{
-  background-color: #777777;
+  background-color: #c4c5c6;
 }
 
 .folder:hover:not(.selected), .file:hover:not(.selected){
-  background-color: #4d4d4d;
+  background-color: #f5f5f7;
 }
 
 
@@ -227,14 +228,36 @@ body::-webkit-scrollbar-thumb {
   background-repeat: no-repeat;
 }
 
-.fileIcon{
-  width: 120px;
+.txtIcon, .pdfIcon, .jsIcon, .cssIcon, .pngIcon, .jpgIcon, .docIcon, .Icon{
+  width: 100px;
   height: 100px;
   padding-top: 20px;
-  background-image: url("../public/fileicon-removebg-preview.png");
+  background-image: url("../public/other.svg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.txtIcon{
+  background-image: url("../public/txt.svg");
+}
+.pdfIcon{
+  background-image: url("../public/pdf.svg");
+}
+.jsIcon{
+  background-image: url("../public/js.svg");
+}
+.cssIcon{
+  background-image: url("../public/css.svg");
+}
+.pngIcon{
+  background-image: url("../public/png.svg");
+}
+.jpgIcon{
+  background-image: url("../public/jpg.svg");
+}
+.docIcon{
+  background-image: url("../public/doc.svg");
 }
 
 .emptyFolder{
@@ -252,8 +275,3 @@ body::-webkit-scrollbar-thumb {
   text-overflow: ellipsis;
   text-align: center;
 }
-
-
-
-
-

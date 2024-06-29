@@ -78,6 +78,12 @@ contextBridge.exposeInMainWorld('fileMethodsAPI', {
     catch(error){
       return null;
     }
+  },
+
+  getFileExt: async (path, name)=>{
+    let ans = await ipcRenderer.invoke('get-ext', path, name);
+    console.log("preload: "+ ans);
+    return ans;
   }
 });
 

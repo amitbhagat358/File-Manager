@@ -84,6 +84,7 @@ const createWindow = () => {
         filesObject.push({
           name: file,
           type: stats.isDirectory() ? 'directory' : 'file',
+          ext: stats.isDirectory()? null: path.extname(file)
         });
       }
       mainWindow.webContents.send('get-files', filesObject);
@@ -186,6 +187,12 @@ const createWindow = () => {
 
     res.reverse();
     return res;
+  })
+
+  ipcMain.handle('get-ext', async (event, x, name) =>{
+    let ans = await path.extname(path.join(baseAddress, x, name));
+    console.log("hey : " + ans);
+    return ans;
   })
 
 };

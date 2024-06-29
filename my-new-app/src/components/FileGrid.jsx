@@ -1,7 +1,7 @@
 import React from 'react';
 import File from './File.jsx';
 
-function FileGrid({ filesAndDirectories, URL, path, setPath, openFile, deleteFile, itemClick, selectedItem }) {
+function FileGrid({ filesAndDirectories, URL, path, setPath, openFile, deleteFile, itemClick, selectedItem}) {
   const hasFolders = filesAndDirectories.some(item => item.type === 'directory');
 
 
@@ -14,6 +14,7 @@ function FileGrid({ filesAndDirectories, URL, path, setPath, openFile, deleteFil
           key={index}
           name={item.name}
           type={item.type}
+          ext={item.ext}
           URL={URL}
           path={path}
           setPath={setPath}
