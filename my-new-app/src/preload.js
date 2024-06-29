@@ -36,8 +36,8 @@ contextBridge.exposeInMainWorld('fileMethodsAPI', {
     }
   },
 
-  onWriteFile: async (path, fileName, data) => {
-    await ipcRenderer.invoke('write-file',path, fileName,data);
+  onWriteFile: async (path, fileName) => {
+    await ipcRenderer.invoke('write-file',path, fileName);
   },
 
   getParentFolder: async(baseAddress, path) =>{

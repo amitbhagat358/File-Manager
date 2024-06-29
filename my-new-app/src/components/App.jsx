@@ -113,13 +113,17 @@ const App = () => {
     return visiblePath;
   }
 
+  const writeFile = (fileName)=>{
+    window.fileMethodsAPI.onWriteFile(path, fileName)
+  }
+
   async function checkFile(fileName) {
     let ans = await window.fileMethodsAPI.onCheckFile(path, fileName);
     if (ans === true) {
       setToastMsgContentFile('success');
       setShowToastMsgFile(true);
       await writeFile(fileName);
-      openFile(fileName);
+      openFileDefault(fileName);
       window.location.reload();
       itemClick({ name: fileName, type: 'file' });
       setIsFolderEmpty(false);

@@ -151,8 +151,8 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.handle('write-file', async (event, x, fileName, data) => {
-    await writeFilePromise(path.join(baseAddress, x, fileName), data);
+  ipcMain.handle('write-file', async (event, x, fileName) => {
+    await writeFilePromise(path.join(baseAddress, x, fileName), "");
   });
 
   ipcMain.handle('get-details', async (event, x, name) =>{
