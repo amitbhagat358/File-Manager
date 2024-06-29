@@ -6,7 +6,6 @@ import Snackbar from './Snackbar.jsx';
 import SnackbarForFile from './SnackbarForFile.jsx';
 import SnackbarForRename from './SnackbarForRename.jsx';
 import OpenFileDialog from './OpenFile.jsx';
-import FolderNavigator from './AddressBar.jsx';
 
 const App = () => {
   const [filesAndDirectories, setFilesAndDirectories] = useState([]);
@@ -15,8 +14,6 @@ const App = () => {
   const [currentFolder, setCurrentFolder] = useState('');
   const [showToastMsg, setShowToastMsg] = useState(null);
   const [toastMsgContent, setToastMsgContent] = useState('');
-  const [fileOpen, setFileOpen] = useState({ value: false, name: '' });
-  const [fileData, setFileData] = useState('');
   const [showToastMsgFile, setShowToastMsgFile] = useState(null);
   const [toastMsgContentFile, setToastMsgContentFile] = useState('');
   const [isFolderEmpty, setIsFolderEmpty] = useState(false);
@@ -116,16 +113,6 @@ const App = () => {
     return visiblePath;
   }
 
-  async function openFile(fileName) {
-    let fileData = await window.fileMethodsAPI.onReadFile(path, fileName);
-    setFileData(fileData);
-    setFileOpen({ value: true, name: fileName });
-  }
-
-  async function writeFile(fileName) {
-    await window.fileMethodsAPI.onWriteFile(path, fileName, fileData);
-  }
-
   async function checkFile(fileName) {
     let ans = await window.fileMethodsAPI.onCheckFile(path, fileName);
     if (ans === true) {
@@ -159,7 +146,9 @@ const App = () => {
     }
   }
 
-
+  const openFileDefault = (name) =>{
+    window.fileMethodsAPI.OnOpenFileDefault(path, name);
+  }
 
 
   return (
@@ -174,7 +163,6 @@ const App = () => {
         deleteFile={deleteFile}
         deleteFolder={deleteFolder}
         checkFile={checkFile}
-        openFile={openFile}
         rename={rename}
         ancestors={ancestors}
         baseAddress={baseAddress}
@@ -197,10 +185,10 @@ const App = () => {
           URL={URL}
           path={path}
           setPath={setPath}
-          openFile={openFile}
           deleteFile={deleteFile}
           itemClick={itemClick}
           selectedItem={selectedItem}
+          openFileDefault={openFileDefault}
         />
       </div>
 
@@ -236,15 +224,6 @@ const App = () => {
         />
       ) : null}
 
-      {fileOpen.value ? (
-        <OpenFileDialog
-          setFileOpen={setFileOpen}
-          fileOpen={fileOpen}
-          fileData={fileData}
-          setFileData={setFileData}
-          writeFile={writeFile}
-        />
-      ) : null}
 
       {isFolderEmpty ? (
         <h3 className="emptyFolder">This folder is empty</h3>

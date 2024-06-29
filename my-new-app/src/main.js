@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, shell, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const open = require('open')
 const { exec } = require('child_process');
 const util = require('util');
 const { AsyncLocalStorage } = require('async_hooks');
@@ -193,6 +194,10 @@ const createWindow = () => {
     let ans = await path.extname(path.join(baseAddress, x, name));
     console.log("hey : " + ans);
     return ans;
+  })
+
+  ipcMain.on('open-file-default', (event, x, name) =>{
+    open(path.join(baseAddress, x, name));
   })
 
 };

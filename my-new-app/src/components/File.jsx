@@ -12,6 +12,7 @@ function File({
   deleteFile,
   itemClick,
   selectedItem,
+  openFileDefault
 }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,8 @@ function File({
       style={{ userSelect: 'none' }}
       onDoubleClick={(e) => {
         e.preventDefault();
-        openFile(name);
+        // openFile(name);
+        openFileDefault(name);
       }}
       onClick={() =>{
         itemClick({name: name, type:type});

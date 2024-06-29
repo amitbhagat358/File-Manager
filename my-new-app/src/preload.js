@@ -84,7 +84,9 @@ contextBridge.exposeInMainWorld('fileMethodsAPI', {
     let ans = await ipcRenderer.invoke('get-ext', path, name);
     console.log("preload: "+ ans);
     return ans;
-  }
+  },
+
+  OnOpenFileDefault: (path, name) => ipcRenderer.send('open-file-default', path, name)
 });
 
 contextBridge.exposeInMainWorld('electronAPI', {
