@@ -6,14 +6,18 @@ const FolderCard = ({baseAddress, name, address, setPath}) => {
 
   const handleClick= () => {
     let newPath = address.replace(baseAddress, "");
-
-    console.log("hi " +  newPath);
     setPath(newPath);
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick();
+    }
   }
   
   return (
     <div>
-      <div className='address-bar-item' onClick={handleClick}>{ name }</div>
+      <div className='address-bar-item' onClick={handleClick} onKeyDown={handleKeyDown} tabIndex={0}>{ name }</div>
     </div>
   )
 }

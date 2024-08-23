@@ -54,12 +54,13 @@ body::-webkit-scrollbar-thumb {
   height:30px;
   display: flex;
   align-items: center;
-  gap:10px;
+  gap:5px;
   font-weight: 500;
   cursor: pointer;
 }
 
 .address-bar-item{
+  padding:5px;
   font-size: 14px;
 }
 
@@ -228,7 +229,7 @@ body::-webkit-scrollbar-thumb {
   background-repeat: no-repeat;
 }
 
-.txtIcon, .pdfIcon, .jsIcon, .cssIcon, .pngIcon, .jpgIcon, .docIcon, .Icon{
+.txtIcon, .pdfIcon, .jsIcon, .cssIcon, .pngIcon, .jpgIcon, .docxIcon, .Icon{
   width: 100px;
   height: 100px;
   padding-top: 20px;
@@ -256,7 +257,7 @@ body::-webkit-scrollbar-thumb {
 .jpgIcon{
   background-image: url("../public/jpg.svg");
 }
-.docIcon{
+.docxIcon{
   background-image: url("../public/doc.svg");
 }
 

@@ -17,17 +17,26 @@ function File({
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleDoubleClick = (e) => {
+    e.preventDefault();
+    openFileDefault(name);
+  }
+
+  const handleClick = () =>{
+    itemClick({name : name, type: type});
+  }
+
+  const handleKeyDown = (e) => {
+    if(e.key == 'Enter' || e.key === ' ') handleDoubleClick(e);
+  }
+
   return (
     <div
       style={{ userSelect: 'none' }}
-      onDoubleClick={(e) => {
-        e.preventDefault();
-        // openFile(name);
-        openFileDefault(name);
-      }}
-      onClick={() =>{
-        itemClick({name: name, type:type});
-      }}
+      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
     >
       <div className={`file ${selectedItem.name ===name? 'selected': null}`}>
         <div className={`Icon ${ext.substring(1)}Icon`}>

@@ -194,6 +194,8 @@ const App = () => {
           selectedItem={selectedItem}
           openFileDefault={openFileDefault}
         />
+
+        {/* <DropFile/> */}
       </div>
 
       {/* {selectedItem.name ? (<div className="details">

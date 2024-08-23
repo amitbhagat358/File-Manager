@@ -4,22 +4,29 @@ import ContextMenu from './ContextMenu.jsx';
 function Folder({ name, type, URL, path, setPath, openFile, deleteFile, itemClick, selectedItem }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleDoubleClick = (e) => {
+    e.preventDefault();
+    setPath(path + '/' + name);
+  }
+
+  const handleClick = () => {
+    itemClick({name: name, type:type});
+  }
+
+  const handleKeyDown = (e) => {
+    if(e.key == 'Enter' || e.key === ' '){
+      handleDoubleClick(e);
+    }
+  }
+
   return (
     <div
-      onDoubleClick={(e) => {
-        console.log(e);
-        e.preventDefault();
-        setPath(path + '/' + name);
-      }}
-      onClick={() => {
-        itemClick({name: name, type:type});
-      }}
-
+      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
     >
       <div
-        // tabIndex={0} // Add tabIndex to make the div focusable
-        // onFocus={handleFocus}
-        // onBlur={handleBlur}
         id={name}
         className={`folder ${selectedItem.name===name? 'selected': null}`}
       >
