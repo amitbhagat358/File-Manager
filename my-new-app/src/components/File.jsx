@@ -12,36 +12,47 @@ function File({
   deleteFile,
   itemClick,
   selectedItem,
-  openFileDefault
+  openFileDefault,
 }) {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleDoubleClick = (e) => {
     e.preventDefault();
     openFileDefault(name);
-  }
+  };
 
-  const handleClick = () =>{
-    itemClick({name : name, type: type});
-  }
+  const handleClick = () => {
+    itemClick({ name: name, type: type });
+  };
 
   const handleKeyDown = (e) => {
-    if(e.key == 'Enter' || e.key === ' ') handleDoubleClick(e);
-  }
+    if (e.key == 'Enter' || e.key === ' ') handleDoubleClick(e);
+  };
+
+  const handleFocus = () => {
+    handleClick();
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    itemClick({name: "", type: ""});
+    setIsFocused(false);
+  };
 
   return (
-    <div
-      style={{ userSelect: 'none' }}
-      onDoubleClick={handleDoubleClick}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-    >
-      <div className={`file ${selectedItem.name ===name? 'selected': null}`}>
-        <div className={`Icon ${ext.substring(1)}Icon`}>
-        
-        </div>
+    <div >
+      <div
+        style={{ userSelect: 'none' }}
+        onDoubleClick={handleDoubleClick}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        tabIndex={0}
+        className={`file ${isFocused ? 'focused' : null}`}
+      >
+        <div className={`Icon ${ext.substring(1)}Icon`}></div>
         <div className="ellipsis">{name}</div>
       </div>
       {isMenuOpen ? <ContextMenu /> : null}
