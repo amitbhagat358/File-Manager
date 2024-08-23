@@ -26,6 +26,7 @@ export default function FormDialog({ checkFile, itemClick, openFile }) {
           sx={{ color: '#70bef2' }}
           aria-label="Create Folder"
           size="small"
+          tabIndex={2}
         >
           <NoteAddIcon />
         </IconButton>

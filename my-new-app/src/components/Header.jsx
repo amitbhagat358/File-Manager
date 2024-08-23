@@ -72,6 +72,7 @@ function Header({
               aria-label="delete"
               size="small"
               disabled={selectedItem.name === ''}
+              tabIndex={2}
             >
               <DeleteIcon />
             </IconButton>

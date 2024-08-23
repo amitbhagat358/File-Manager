@@ -48,7 +48,7 @@ function Folder({
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        tabIndex={0}
+        tabIndex={4}
         id={name}
         className={`folder ${isFocused ? 'focused' : null}`}
       >

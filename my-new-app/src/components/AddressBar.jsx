@@ -17,7 +17,7 @@ const FolderCard = ({baseAddress, name, address, setPath}) => {
   
   return (
     <div>
-      <div className='address-bar-item' onClick={handleClick} onKeyDown={handleKeyDown} tabIndex={0}>{ name }</div>
+      <div className='address-bar-item' onClick={handleClick} onKeyDown={handleKeyDown} tabIndex={1}>{ name }</div>
     </div>
   )
 }

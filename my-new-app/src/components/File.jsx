@@ -49,7 +49,7 @@ function File({
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        tabIndex={0}
+        tabIndex={4}
         className={`file ${isFocused ? 'focused' : null}`}
       >
         <div className={`Icon ${ext.substring(1)}Icon`}></div>

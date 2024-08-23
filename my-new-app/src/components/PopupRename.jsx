@@ -24,6 +24,7 @@ export default function FormDialog({ rename, itemClick, selectedItem }) {
             aria-label="rename"
             size="small"
             disabled ={selectedItem.name===""}
+            tabIndex={2}
           >
             <EditIcon />
           </IconButton>
