@@ -18,6 +18,7 @@ function Folder({
   const handleDoubleClick = (e) => {
     e.preventDefault();
     setPath(path + '/' + name);
+    itemClick({ name: '', type: '' });
   };
 
   const handleClick = () => {
@@ -36,7 +37,6 @@ function Folder({
   };
 
   const handleBlur = () => {
-    itemClick({name: "", type: ""});
     setIsFocused(false);
   };
 

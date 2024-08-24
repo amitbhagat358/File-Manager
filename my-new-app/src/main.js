@@ -11,6 +11,7 @@ const readFilePromise = util.promisify(fs.readFile);
 const writeFilePromise = util.promisify(fs.writeFile);
 const statPromise = util.promisify(fs.stat);
 const renamePromise = util.promisify(fs.rename);
+const unlinkPromise = util.promisify(fs.unlink);
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -115,14 +116,27 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.on('delete-file', (event, x, fileName) => {
-    fs.unlink(path.join(baseAddress, x, fileName), (err) => {
-      if (err) {
-        console.error('Error deleting file: ', err);
-        return;
-      }
-      console.log('file deleted successfully! ');
-    });
+  ipcMain.handle('delete-file', async (event, x, fileName) => {
+    try{
+      await unlinkPromise(path.join(baseAddress, x, fileName));
+      console.log("delete succesfully in main")
+      return true;
+    }
+    catch(err){
+      console.log(err);
+      console.log("not delete succesfully in main")
+      return false;
+    }
+    // fs.unlink(path.join(baseAddress, x, fileName), (err) => {
+    //   if (err) {
+    //     console.error('Error deleting file: ', err);
+    //     return true;
+    //   }
+    //   else{
+    //     console.log('file deleted successfully! ');
+    //     return false;
+    //   }
+    // });
   });
 
   ipcMain.handle('delete-folder', async (event, x, folderName) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import PopupFolderName from './PopupFolderName.jsx';
@@ -25,6 +25,36 @@ function Header({
   baseAddress,
   setPath,
 }) {
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const handleFocusChange = () => {
+    const activeElement = document.activeElement;
+    if (
+      activeElement.classList.contains('file') || 
+      activeElement.classList.contains('folder')
+    ) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('focusin', handleFocusChange);
+    window.addEventListener('focusout', handleFocusChange);
+
+    return () => {
+      window.removeEventListener('focusin', handleFocusChange);
+      window.removeEventListener('focusout', handleFocusChange);
+    };
+  }, []);
+
+  const handleClick = () =>{
+    itemClick({name: '', type:''});
+  }
+
+
   return (
     <div className="header1">
       <div className="top">
@@ -59,10 +89,12 @@ function Header({
         <div
           className="delete"
           onClick={() => {
-            if (selectedItem.name !== '') {
+            if (selectedItem?.name !== '') {
               selectedItem.type === 'directory'
                 ? deleteFolder(selectedItem.name)
                 : deleteFile(selectedItem.name);
+
+                handleClick();
             }
           }}
         >
@@ -71,13 +103,14 @@ function Header({
               color="error"
               aria-label="delete"
               size="small"
-              disabled={selectedItem.name === ''}
+              disabled={isDisabled}
+              onClick={handleClick}
               tabIndex={2}
             >
               <DeleteIcon />
             </IconButton>
           </div>
-          <div className="deleteText" style={selectedItem.name === ''? {color:"#b6b6b7", cursor:"default"}:null}>
+          <div className="deleteText" style={isDisabled? {color:"#b6b6b7", cursor:"default"}:null}>
             <span>Delete</span>
           </div>
         </div>

@@ -2,26 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header.jsx';
 import FolderGrid from './FolderGrid.jsx';
 import FileGrid from './FileGrid.jsx';
-import Snackbar from './Snackbar.jsx';
-import SnackbarForFile from './SnackbarForFile.jsx';
-import SnackbarForRename from './SnackbarForRename.jsx';
-import OpenFileDialog from './OpenFile.jsx';
+import {toast} from 'react-toastify';
 
 const App = () => {
   const [filesAndDirectories, setFilesAndDirectories] = useState([]);
   const [path, setPath] = useState('');
   const [selectedItem, setSelectedItem] = useState({ name: null, type: null });
   const [currentFolder, setCurrentFolder] = useState('');
-  const [showToastMsg, setShowToastMsg] = useState(null);
-  const [toastMsgContent, setToastMsgContent] = useState('');
-  const [showToastMsgFile, setShowToastMsgFile] = useState(null);
-  const [toastMsgContentFile, setToastMsgContentFile] = useState('');
   const [isFolderEmpty, setIsFolderEmpty] = useState(false);
   const [details, setDetails] = useState(null);
   const [ancestors, setAncestors] = useState(null);
 
-
-
+  
   let baseAddress = `C:\\Users\\amitb\\OneDrive\\Desktop\\file-manager`;
 
   useEffect(() => {
@@ -79,24 +71,34 @@ const App = () => {
   async function createFolder(folderName) {
     let ans = await window.fileMethodsAPI.onCreateFolder(path, folderName);
     if (ans === true) {
-      setToastMsgContent('success');
-      setShowToastMsg(true);
+      toast.success('Folder created successfully.');
       setIsFolderEmpty(false);
     } else {
-      setToastMsgContent('error');
-      setShowToastMsg(true);
+      toast.error('Error creating folder.');
     }
     window.location.reload();
   }
 
-  function deleteFile(fileName) {
-    window.fileMethodsAPI.onDeleteFile(path, fileName);
-    setSelectedItem({ value: false, name: '' });
+  async function deleteFile(fileName) {
+    let ans = await window.fileMethodsAPI.onDeleteFile(path, fileName);
+    setSelectedItem({name: "", type: ""});
+
+    if(ans === true){
+      toast.success('File deleted successfully.');
+    }
+    else{
+      toast.error('Error deleting folder.');
+    }
+
     window.location.reload();
   }
 
   async function deleteFolder(folderName) {
-    await window.fileMethodsAPI.onDeleteFolder(path, folderName);
+    let ans = await window.fileMethodsAPI.onDeleteFolder(path, folderName);
+    setSelectedItem({name: "", type: ""});
+
+    if(ans === true) toast.success('Folder deleted successfully.');
+    else toast.error('Error deleting folder.');
     window.location.reload();
   }
 
@@ -120,33 +122,27 @@ const App = () => {
   async function checkFile(fileName) {
     let ans = await window.fileMethodsAPI.onCheckFile(path, fileName);
     if (ans === true) {
-      setToastMsgContentFile('success');
-      setShowToastMsgFile(true);
+      toast.success('File created successfully.');
       await writeFile(fileName);
       openFileDefault(fileName);
       window.location.reload();
       itemClick({ name: fileName, type: 'file' });
       setIsFolderEmpty(false);
     } else {
-      setToastMsgContentFile('error');
-      setShowToastMsgFile(true);
+      toast.error('Error creating file.');
     }
   }
 
-  const [showToastMsgRename, setShowToastMsgRename] = useState(null);
-  const [toastMsgContentRename, setToastMsgContentRename] = useState('');
 
   async function rename(oldName, newName) {
     let check = await window.fileMethodsAPI.onCheckFile(path, newName);
     if (check) {
       await window.fileMethodsAPI.onRename(path, oldName, newName);
-      setToastMsgContentRename('success');
-      setShowToastMsgRename(true);
+      toast.success('Item renamed successfully.')
       itemClick({ name: newName, type: '' });
       window.location.reload();
     } else {
-      setToastMsgContentRename('error');
-      setShowToastMsgRename(true);
+      toast.error('Error renaming item');
     }
   }
 
@@ -205,30 +201,6 @@ const App = () => {
           ctime : {details.ctimeMs}
           atime: {details.atimeMs}
         </div>) : null} */}
-
-      {showToastMsg ? (
-        <Snackbar
-          msg={showToastMsg}
-          setMsg={setShowToastMsg}
-          content={toastMsgContent}
-        />
-      ) : null}
-
-      {showToastMsgFile ? (
-        <SnackbarForFile
-          msg={showToastMsgFile}
-          setMsg={setShowToastMsgFile}
-          content={toastMsgContentFile}
-        />
-      ) : null}
-
-      {showToastMsgRename ? (
-        <SnackbarForRename
-          msg={showToastMsgRename}
-          setMsg={setShowToastMsgRename}
-          content={toastMsgContentRename}
-        />
-      ) : null}
 
 
       {isFolderEmpty ? (

@@ -36,7 +36,6 @@ function File({
   };
 
   const handleBlur = () => {
-    itemClick({name: "", type: ""});
     setIsFocused(false);
   };
 

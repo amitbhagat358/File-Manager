@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld('fileMethodsAPI', {
     return folderCreated;
   },
 
-  onDeleteFile: (path, fileName) => ipcRenderer.send('delete-file', path, fileName),
+  onDeleteFile: async (path, fileName) => await ipcRenderer.invoke('delete-file', path, fileName),
   onDeleteFolder: async (path, folderName) => await ipcRenderer.invoke('delete-folder', path, folderName),
 
   onReadFile: async (path, fileName) => {

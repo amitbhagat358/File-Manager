@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,26 +10,50 @@ import IconButton from '@mui/material/IconButton';
 
 export default function FormDialog({ rename, itemClick, selectedItem }) {
   const [open, setOpen] = React.useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
   };
 
+
+  const handleFocusChange = () => {
+    const activeElement = document.activeElement;
+
+    if(activeElement === document.body) setIsDisabled(true);
+    else if (
+      activeElement.classList.contains('file') || 
+      activeElement.classList.contains('folder')
+    ) {
+      setIsDisabled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('focusin', handleFocusChange);
+    window.addEventListener('focusout', handleFocusChange);
+
+    return () => {
+      window.removeEventListener('focusin', handleFocusChange);
+      window.removeEventListener('focusout', handleFocusChange);
+    };
+  }, []);
+
   return (
     <React.Fragment>
-      <div className="rename" onClick={() => {if(selectedItem.name!== "")setOpen(true)}}>
+      <div className="rename" onClick={() => {if(selectedItem?.name!== "") setOpen(true)}}>
         <div className="renameIcon">
           <IconButton
             sx={{ color: '#70bef2' }}
             aria-label="rename"
             size="small"
-            disabled ={selectedItem.name===""}
+            disabled ={isDisabled}
             tabIndex={2}
           >
             <EditIcon />
           </IconButton>
         </div>
-        <div className="renameText" style={selectedItem.name === ''? {color:"#b6b6b7", cursor:"default"}:null}>
+        <div className="renameText" style={isDisabled? {color:"#b6b6b7", cursor:"default"}:null}>
           <span>Rename</span>
         </div>
       </div>
